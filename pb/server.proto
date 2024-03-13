@@ -1,0 +1,62 @@
+syntax = "proto3"; // 版本声明，使用Protocol Buffers v3版本
+
+option go_package = "sm2enc/pb";  // 指定生成的Go代码在你项目中的导入路径
+
+package sm2crypto;
+
+service SM2CryptoService {
+  rpc GenerateKeyPair (Empty) returns (KeyPair) {}
+  rpc Encrypt (EncryptRequest) returns (EncryptResponse) {}
+  rpc Decrypt (DecryptRequest) returns (DecryptResponse) {}
+  rpc HomomorphicAdd (HomomorphicAddRequest) returns (HomomorphicAddResponse) {}
+}
+
+message Empty {}
+
+message KeyPair {
+  bytes privateKey = 1;
+  bytes publicKey = 2;
+}
+
+message EncryptRequest {
+  bytes publicKey = 1;
+  int64 plaintext = 2;
+}
+
+message EncryptResponse {
+  bytes c1x = 1;
+  bytes c1y = 2;
+  bytes c2x = 3;
+  bytes c2y = 4;
+}
+
+message DecryptRequest {
+  bytes privateKey = 1;
+  bytes c1x = 2;
+  bytes c1y = 3;
+  bytes c2x = 4;
+  bytes c2y = 5;
+}
+
+message DecryptResponse {
+  int64 plaintext = 1;
+}
+
+message HomomorphicAddRequest {
+  bytes publicKey = 1;
+  bytes c1x1 = 2;
+  bytes c1y1 = 3;
+  bytes c2x1 = 4;
+  bytes c2y1 = 5;
+  bytes c1x2 = 6;
+  bytes c1y2 = 7;
+  bytes c2x2 = 8;
+  bytes c2y2 = 9;
+}
+
+message HomomorphicAddResponse {
+  bytes sumC1x = 1;
+  bytes sumC1y = 2;
+  bytes sumC2x = 3;
+  bytes sumC2y = 4;
+}
