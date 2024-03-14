@@ -160,6 +160,7 @@ func (s *server) Encrypt(ctx context.Context, req *pb.EncryptRequest) (*pb.Encry
 	}
 
 	// 使用公钥加密请求中的整数
+	fmt.Printf("Encrypt Plaintext: %v\n", req.Plaintext)
 	c1x, c1y, c2x, c2y := encryptIntWithPublicKey(publicKey, req.Plaintext)
 
 	// 构建加密响应，这里假设pb.EncryptResponse中有C1x, C1y, C2x, C2y字段，它们都是[]byte类型
@@ -194,6 +195,8 @@ func (s *server) Decrypt(ctx context.Context, req *pb.DecryptRequest) (*pb.Decry
 		log.Printf("解密失败: %v", err)
 		return nil, err
 	}
+
+	fmt.Printf("Decrypt Plaintext: %v\n", plaintext)
 
 	// 构建解密响应，这里假设pb.DecryptResponse中有一个Plaintext字段，它是int64类型
 	// 实际protobuf结构可能有所不同，请根据实际情况调整

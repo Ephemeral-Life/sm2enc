@@ -30,7 +30,7 @@ func LgwHEnc(rand io.Reader, key *PublicKey, m *big.Int) (x1, y1, c2x, c2y *big.
 }
 
 func LgwHDec(key *PrivateKey, c1x, c1y, c2x, c2y *big.Int) (int, error) {
-	fmt.Printf("\n\nkey: %v\nc1x: %v\nc1y: %v\nc2x: %v\nc2y: %v\n", key, c1x, c1y, c2x, c2y)
+	//fmt.Printf("\n\nkey: %v\nc1x: %v\nc1y: %v\nc2x: %v\nc2y: %v\n", key, c1x, c1y, c2x, c2y)
 	var m int = -1
 	x2, y2 := key.Curve.ScalarMult(c1x, c1y, key.D.Bytes())
 	inv_y2 := new(big.Int)
